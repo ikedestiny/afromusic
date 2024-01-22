@@ -1,0 +1,58 @@
+<html lang="en" xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Artist Profile</title>
+</head>
+<body class="d-flex flex-column">
+
+<section layout:fragment="body" class="py-5">
+    <header class="py-5 bg-light border-bottom mb-4">
+        <div class="container">
+            <div class="text-center my-5">
+                <h1 class="fw-bolder" th:text="${artist.name}"></h1>
+                <p class="lead mb-0" th:text="${artist.genre}">genre</p>
+            </div>
+        </div>
+    </header>
+    <!-- Page content-->
+    <div class="container">
+        <div class="row">
+            <!-- Blog entries-->
+            <div class="col-lg-8">
+                <!-- Featured blog post-->
+                <div class="card mb-4">
+                    <a href="#!"><img class="card-img-top" th:src="${artist.photoUrl}" alt="..." /></a>
+                    <div class="card-body">
+                        <h2 class="card-title" th:text="${artist.name}" >Event Title</h2>
+                        <p class="card-text" th:text="${artist.about}"></p>
+                        <a class="btn btn-primary" th:href="@{/artists/{artistId}/edit(artistId=${artist.id})}">Edit</a>
+                        <a class="btn btn-primary" >Delete</a>
+                        <a class="btn btn-primary" th:href="@{/videos/{artistId}/new(artistId=${artist.id})}">Create Video</a>
+                    </div>
+                </div>
+                <!-- Nested row for non-featured blog posts-->
+                <div class="row">
+                    <div class="col-lg-6">
+                        <!-- Blog post-->
+                        <div th:each="video :${artist.popularSongs}" class="card mb-4">
+                                <iframe style="width:100%;aspect-ratio: 1200 / 675;"
+                                        th:src="${video.videoUrl}"
+                                        referrerpolicy="no-referrer-when-downgrade"
+                                        frameborder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"  allowfullscreen>
+                                </iframe>
+                            <a th:text="${video.name}" class="card-title h4 fw-bolder text-decoration-none link-dark  mb-3" th:href="${video.videoUrl}">Project Name</a>
+                            <a class="btn btn-primary" th:href="@{/videos/{videoId}/delete(videoId=${video.id})}">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

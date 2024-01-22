@@ -1,0 +1,70 @@
+<html lang="en" xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+  <meta charset="UTF-8">
+  <title>Create Artist Profile</title>
+</head>
+<body class="d-flex flex-column h-100">
+<main class="flex-shrink-0">
+
+  <section layout:fragment="body" class="py-5">
+    <div class="container">
+      <form role="form" method="post" th:action="@{/artists/new}" th:object="${artist}">
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="name">Name</label>
+            <input
+                    type="text"
+                    class="form-control"
+                    id="name"
+                    name="name"
+                    th:field="*{name}"
+                    placeholder="Name of Artist">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="photoUrl">PhotoUrl</label>
+            <input
+                    type="text"
+                    class="form-control"
+                    id="photoUrl"
+                    name="photoUrl"
+                    th:field="*{photoUrl}"
+                    placeholder="Photo Url">
+
+          </div>
+        </div>
+        <div class="form-group mb-3">
+          <label for="genre">Genre</label>
+          <input
+                  type="text"
+                  class="form-control"
+                  id="genre"
+                  name="genre"
+                  th:field="*{genre}"
+                  placeholder="Genre">
+        </div>
+        <div class="form-group mb-3">
+          <label for="about">About artist</label>
+          <input
+                  type="text"
+                  class="form-control"
+                  id="about"
+                  name="about"
+                  th:field="*{about}"
+                  placeholder="About">
+        </div>
+        <button type="submit" class="btn btn-primary">Create</button>
+      </form>
+    </div>
+  </section>
+  <section class="py-5 bg-light">
+    <div class="container px-5 my-5">
+      <h2 class="display-4 fw-bolder mb-4">Let's build something together</h2>
+      <a class="btn btn-lg btn-primary" href="#!">Contact us</a>
+    </div>
+  </section>
+</main>
+
+</body>
+</html>

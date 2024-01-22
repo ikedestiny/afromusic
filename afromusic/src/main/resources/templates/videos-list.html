@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+  <meta charset="UTF-8">
+  <title>Videos List</title>
+</head>
+<body class="d-flex flex-column h-100">
+<main class="flex-shrink-0">
+
+  <!-- Page Content-->
+  <section layout:fragment="body" class="py-5">
+    <div class="container px-5 my-5">
+      <div class="text-center mb-5">
+        <h1 class="fw-bolder"> Afro Music Videos</h1>
+        <p class="lead fw-normal text-muted mb-0">popular ones</p>
+      </div>
+      <div class="row gx-5">
+        <div th:each="video :${videos}" class="col-lg-6 mb-2">
+          <div class="position-relative mb-3">
+
+            <iframe style="width:100%;aspect-ratio: 1200 / 675;"
+                    th:src="${video.videoUrl}"
+                    referrerpolicy="no-referrer-when-downgrade"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    >
+            </iframe>
+          </div>
+          <div><a th:text="${video.name}" class="h2 fw-bolder text-decoration-none link-dark  mb-3" th:href="${video.videoUrl}">Project Name</a></div>
+          <a href="#!" class="btn btn-primary" >View</a>
+          <a href="#!" class="btn btn-primary" >Edit</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="py-5 bg-light">
+    <div class="container px-5 my-5">
+      <h2 class="display-4 fw-bolder mb-4">Let's build something together</h2>
+      <a class="btn btn-lg btn-primary" href="#!">Contact us</a>
+    </div>
+  </section>
+</main>
+
+</body>
+</html>
+
+
+
+
+
+
+
