@@ -71,5 +71,23 @@ public class ArtistController {
     }
 
 
+    @GetMapping("/artists/search")
+    public String searchForArtist(@RequestParam(value = "query") String query, Model model){
+            List<Artist> artists = artistService.searchForArtist(query);
+            model.addAttribute("artists",artists);
+            return "artists-list";
+    }
+
+
+    @GetMapping("/contact")
+    public String contactUs(Model model){
+        return "contact";
+    }
+
+    @GetMapping("/home")
+    public String homepage(Model model){
+        return "home";
+    }
+
 
 }

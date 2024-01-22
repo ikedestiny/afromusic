@@ -5,10 +5,7 @@ import com.dev.afromusic.service.MusicVideoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -48,4 +45,13 @@ public class MusicVideoController {
             musicVideoService.deleteVideo(videoId);
             return "redirect:/artists";
     }
+
+    @GetMapping("/videos/search")
+    public String searchVideos(@RequestParam(value = "query") String query, Model model){
+        List<MusicVideo> videos = musicVideoService.searchMusicVideos(query);
+        model.addAttribute("videos", videos);
+        return "videos-list";
+    }
+
+
 }

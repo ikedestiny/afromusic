@@ -17,7 +17,11 @@
         <p class="lead fw-normal text-muted mb-0">Some great artists</p>
       </div>
       <div class="row gx-5">
-        <!-- I will add the search bar here -->
+        <div>
+          <form th:action="@{/artists/search}" class="form-inline my-2 my-lg-0 mb-3">
+            <input name="query" class="form-control mr-sm-2 mb-5" type="search" placeholder="What artist are you looking for?" aria-label="What artist are you looking for?">
+          </form>
+        </div>
         <div th:each="artist :${artists}" class="col-lg-6 mb-2">
           <div class="position-relative mb-3">
             <img class="img-fluid rounded-3 mb-3" th:src="${artist.photoUrl}" alt="..." />

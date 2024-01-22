@@ -36,6 +36,7 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <!-- Blog post-->
+                        <div>
                         <div th:each="video :${artist.popularSongs}" class="card mb-4">
                                 <iframe style="width:100%;aspect-ratio: 1200 / 675;"
                                         th:src="${video.videoUrl}"
@@ -44,7 +45,7 @@
                                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"  allowfullscreen>
                                 </iframe>
                             <a th:text="${video.name}" class="card-title h4 fw-bolder text-decoration-none link-dark  mb-3" th:href="${video.videoUrl}">Project Name</a>
-                            <a class="btn btn-primary" th:href="@{/videos/{videoId}/delete(videoId=${video.id})}">Delete</a>
+                            <a class="btn btn-primary" th:href="@{/videos/{videoId}/delete(videoId=${video.id})}">Delete</a></div>
                         </div>
                     </div>
                 </div>

@@ -12,4 +12,6 @@ public interface MusicVideoService {
     void createVideo(Long artistId, MusicVideo musicVideo);
 
     void deleteVideo(Long videoId);
+
+    List<MusicVideo> searchMusicVideos(String query);
 }

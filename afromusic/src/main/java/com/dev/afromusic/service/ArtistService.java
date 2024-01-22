@@ -16,4 +16,6 @@ public interface ArtistService {
     void updateArtistProfile(Artist artist);
 
     void deleteArtist(Long artistId);
+
+    List<Artist> searchForArtist(String query);
 }

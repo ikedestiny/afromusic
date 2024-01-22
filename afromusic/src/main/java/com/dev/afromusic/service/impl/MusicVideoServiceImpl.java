@@ -40,6 +40,11 @@ public class MusicVideoServiceImpl implements MusicVideoService {
     public void deleteVideo(Long videoId) {
         musicVideoRepository.deleteById(videoId);
     }
+
+    @Override
+    public List<MusicVideo> searchMusicVideos(String query) {
+        return musicVideoRepository.searchMusicVideos(query);
+    }
 }
 
 

@@ -41,4 +41,9 @@ public class ArtistServiceImpl implements ArtistService {
     public void deleteArtist(Long artistId) {
         artistRepository.deleteById(artistId);
     }
+
+    @Override
+    public List<Artist> searchForArtist(String query) {
+        return artistRepository.searchArtists(query);
+    }
 }
