@@ -1,7 +1,10 @@
 package com.dev.afromusic.controller;
 
 import com.dev.afromusic.models.Artist;
+import com.dev.afromusic.models.UserEntity;
+import com.dev.afromusic.security.SecurityUtil;
 import com.dev.afromusic.service.ArtistService;
+import com.dev.afromusic.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,15 +16,25 @@ import java.util.List;
 public class ArtistController {
 
     private ArtistService artistService;
+    private UserService userService;
 
     @Autowired
-    public ArtistController(ArtistService artistService) {
+    public ArtistController(ArtistService artistService,UserService userService) {
+
         this.artistService = artistService;
+        this.userService = userService;
     }
 
     @GetMapping("/artists")
     public String getAllArtists(Model model){
+        UserEntity user = new UserEntity();
         List<Artist> artists = artistService.findAllArtists();
+        String username = SecurityUtil.getSessionUser();
+        if (username!=null){
+            user = userService.findByUsername(username);
+            model.addAttribute("user", user);
+        }
+        model.addAttribute("user", user);
         model.addAttribute("artists", artists);
         return "artists-list";
     }
@@ -58,7 +71,14 @@ public class ArtistController {
 
     @GetMapping("artists/{artistId}")
     public String viewArtist(@PathVariable("artistId") long artistId, Model model){
+        UserEntity user = new UserEntity();
+        String username = SecurityUtil.getSessionUser();
+        if (username!=null){
+            user = userService.findByUsername(username);
+            model.addAttribute("user", user);
+        }
         Artist artist = artistService.findArtistById(artistId);
+        model.addAttribute("user", user);
         model.addAttribute("artist",artist);
         return "artists-detail";
     }

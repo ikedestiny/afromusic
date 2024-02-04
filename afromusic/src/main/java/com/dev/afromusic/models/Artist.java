@@ -27,4 +27,7 @@ public class Artist {
     @OneToMany(mappedBy = "artist", cascade = CascadeType.REMOVE)
     private List<MusicVideo> popularSongs = new ArrayList<>();
 
+    @ManyToOne
+    @JoinColumn(name = "created_by", nullable = false)
+    private UserEntity createdBy;
 }

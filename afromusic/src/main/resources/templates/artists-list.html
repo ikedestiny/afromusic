@@ -12,6 +12,9 @@
   <!-- Page Content-->
   <section layout:fragment="body" class="py-5">
     <div class="container px-5 my-5">
+      <div th:if="${param.success}" class="alert alert-success">
+        You are registered successfully!
+      </div>
       <div class="text-center mb-5">
         <h1 class="fw-bolder">Artists</h1>
         <p class="lead fw-normal text-muted mb-0">Some great artists</p>
@@ -28,8 +31,10 @@
             <a th:text="${artist.name}" class="h3 fw-bolder text-decoration-none link-dark stretched-link" href="#!">Project Name</a>
           </div>
           <a class="btn btn-primary" th:href="@{/artists/{artistId}(artistId=${artist.id})}">View</a>
-          <a class="btn btn-primary" th:href="@{/artists/{artistId}/edit(artistId=${artist.id})}">Edit</a>
-          <a class="btn btn-primary" th:href="@{/artists/{artistId}/delete(artistId=${artist.id})}">Delete</a>
+          <div th:if="${user.id} == ${artist.createdBy.id}">
+            <a class="btn btn-primary" th:href="@{/artists/{artistId}/edit(artistId=${artist.id})}">Edit</a>
+            <a class="btn btn-primary" th:href="@{/artists/{artistId}/delete(artistId=${artist.id})}">Delete</a>
+          </div>
         </div>
       </div>
     </div>

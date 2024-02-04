@@ -1,7 +1,12 @@
 package com.dev.afromusic.controller;
 
+import com.dev.afromusic.models.Artist;
 import com.dev.afromusic.models.MusicVideo;
+import com.dev.afromusic.models.UserEntity;
+import com.dev.afromusic.security.SecurityUtil;
+import com.dev.afromusic.service.ArtistService;
 import com.dev.afromusic.service.MusicVideoService;
+import com.dev.afromusic.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,15 +17,24 @@ import java.util.List;
 @Controller
 public class MusicVideoController {
     private MusicVideoService musicVideoService;
+    private UserService userService;
 
     @Autowired
-    public MusicVideoController(MusicVideoService musicVideoService) {
+    public MusicVideoController(MusicVideoService musicVideoService, UserService userService) {
         this.musicVideoService = musicVideoService;
+        this.userService = userService;
     }
 
     @GetMapping("/videos")
     public String getAllVideos(Model model){
+        UserEntity user = new UserEntity();
+        String username = SecurityUtil.getSessionUser();
         List<MusicVideo> videos = musicVideoService.findAllMusicVideos();
+        if (username!=null){
+            user = userService.findByUsername(username);
+            model.addAttribute("user", user);
+        }
+        model.addAttribute("user", user);
         model.addAttribute("videos", videos);
         return "videos-list";
     }

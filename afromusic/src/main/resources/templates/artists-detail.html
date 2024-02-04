@@ -27,9 +27,11 @@
                     <div class="card-body">
                         <h2 class="card-title" th:text="${artist.name}" >Event Title</h2>
                         <p class="card-text" th:text="${artist.about}"></p>
-                        <a class="btn btn-primary" th:href="@{/artists/{artistId}/edit(artistId=${artist.id})}">Edit</a>
-                        <a class="btn btn-primary" >Delete</a>
-                        <a class="btn btn-primary" th:href="@{/videos/{artistId}/new(artistId=${artist.id})}">Create Video</a>
+                        <div th:if="${user.id} == ${artist.createdBy.id}">
+                            <a class="btn btn-primary" th:href="@{/artists/{artistId}/edit(artistId=${artist.id})}">Edit</a>
+                            <a class="btn btn-primary" >Delete</a>
+                            <a class="btn btn-primary" th:href="@{/videos/{artistId}/new(artistId=${artist.id})}">Create Video</a>
+                        </div>
                     </div>
                 </div>
                 <!-- Nested row for non-featured blog posts-->
@@ -45,7 +47,10 @@
                                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"  allowfullscreen>
                                 </iframe>
                             <a th:text="${video.name}" class="card-title h4 fw-bolder text-decoration-none link-dark  mb-3" th:href="${video.videoUrl}">Project Name</a>
-                            <a class="btn btn-primary" th:href="@{/videos/{videoId}/delete(videoId=${video.id})}">Delete</a></div>
+                            <div th:if="${user.id} == ${artist.createdBy.id}">
+                                <a class="btn btn-primary" th:href="@{/videos/{videoId}/delete(videoId=${video.id})}">Delete</a>
+                            </div>
+                        </div>
                         </div>
                     </div>
                 </div>
